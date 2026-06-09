@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad — PokeQuiz</title>
+  <style>
+    :root {
+      --bg:        #080D18;
+      --surface:   #0F1923;
+      --border:    #1E2D45;
+      --primary:   #E53E3E;
+      --secondary: #38BDF8;
+      --gold:      #FBBF24;
+      --text:      #F1F5F9;
+      --muted:     #94A3B8;
+      --dim:       #475569;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .pokeball {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, var(--primary) 50%, #F1F5F9 50%);
+      border: 3px solid #0a0a0a;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pokeball::before {
+      content: "";
+      position: absolute;
+      left: -3px; right: -3px;
+      top: calc(50% - 3px);
+      height: 6px;
+      background: #0a0a0a;
+    }
+
+    .pokeball::after {
+      content: "?";
+      position: absolute;
+      width: 14px; height: 14px;
+      background: var(--bg);
+      border: 2px solid #0a0a0a;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 8px;
+      font-weight: 900;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding-top: 1px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+
+    header h1 span { color: var(--primary); }
+
+    header p {
+      color: var(--muted);
+      font-size: .85rem;
+      margin-top: 4px;
+    }
+
+    /* ── Layout ── */
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Intro card ── */
+    .intro-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+
+    .intro-card p { color: var(--muted); font-size: .95rem; }
+    .intro-card strong { color: var(--text); }
+
+    .update-badge {
+      display: inline-block;
+      background: var(--border);
+      color: var(--muted);
+      font-size: .78rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      letter-spacing: .3px;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2 .num {
+      background: var(--border);
+      color: var(--dim);
+      font-size: .75rem;
+      font-weight: 700;
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    p { color: var(--muted); margin-bottom: 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    ul li {
+      color: var(--muted);
+      padding: 6px 0 6px 20px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    ul li:last-child { border-bottom: none; }
+
+    ul li::before {
+      content: "▸";
+      color: var(--primary);
+      position: absolute;
+      left: 0;
+      font-size: .85em;
+    }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    /* ── Third-party cards ── */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .service-card .svc-name {
+      font-weight: 700;
+      color: var(--text);
+      font-size: .9rem;
+      margin-bottom: 4px;
+    }
+
+    .service-card p {
+      font-size: .82rem;
+      margin: 0;
+    }
+
+    /* ── Highlight box ── */
+    .highlight {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 12px;
+    }
+
+    /* ── Contact ── */
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      padding: 24px 28px;
+      text-align: center;
+    }
+
+    .contact-box p { margin-bottom: 8px; }
+
+    .contact-email {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      padding: 8px 20px;
+      margin-top: 8px;
+      transition: background .2s;
+    }
+
+    .contact-email:hover { background: rgba(229,62,62,.12); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      color: var(--dim);
+      font-size: .82rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.2rem; }
+      main { padding: 32px 16px 60px; }
+      .service-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="pokeball"></div>
+    <div>
+      <h1>Poke<span>Quiz</span></h1>
+      <p>Política de Privacidad</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="intro-card">
+    <span class="update-badge">Última actualización: junio 2026</span>
+    <p>
+      Esta política de privacidad describe cómo <strong>PokeQuiz</strong>
+      recopila, usa y protege la información de sus usuarios. Al usar la
+      aplicación, aceptás los términos descritos a continuación.
+    </p>
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <h2><span class="num">1</span>Información que recopilamos</h2>
+    <p>PokeQuiz recopila únicamente la información necesaria para ofrecer la experiencia de juego y el registro de progreso.</p>
+    <ul>
+      <li><strong>Datos de cuenta Google:</strong> nombre, dirección de correo electrónico y foto de perfil, obtenidos a través de Google Sign-In al iniciar sesión.</li>
+      <li><strong>Historial de partidas:</strong> puntuaciones, respuestas correctas, intentos totales y racha máxima de cada partida.</li>
+      <li><strong>Progreso y estadísticas:</strong> XP acumulado, nivel de entrenador, racha diaria de juego, generaciones jugadas y logros desbloqueados.</li>
+      <li><strong>Tabla de clasificación:</strong> nombre de usuario y puntuación máxima, visibles para otros jugadores autenticados.</li>
+    </ul>
+    <p>No recopilamos datos de ubicación, contactos, cámara, micrófono ni ningún otro dato del dispositivo.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2><span class="num">2</span>Cómo usamos la información</h2>
+    <ul>
+      <li>Autenticar tu identidad y mantener tu sesión activa.</li>
+      <li>Guardar y mostrar tu historial de partidas y estadísticas de progreso.</li>
+      <li>Calcular y mostrar logros desbloqueados.</li>
+      <li>Mostrar tu posición en la tabla de clasificación global.</li>
+      <li>Mejorar la experiencia de juego en futuras versiones de la app.</li>
+    </ul>
+    <p><strong>No vendemos, alquilamos ni compartimos tus datos personales con terceros para fines comerciales o publicitarios.</strong></p>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2><span class="num">3</span>Servicios de terceros</h2>
+    <p>PokeQuiz utiliza los siguientes servicios externos. Cada uno tiene su propia política de privacidad:</p>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="svc-name">Firebase Authentication</div>
+        <p>Gestión del inicio de sesión con Google. Proveedor: Google LLC.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-name">Cloud Firestore</div>
+        <p>Almacenamiento del progreso, historial y logros. Proveedor: Google LLC.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-name">Google Sign-In</div>
+        <p>Autenticación mediante cuenta de Google. No almacenamos tu contraseña.</p>
+      </div>
+      <div class="service-card">
+        <div class="svc-name">PokéAPI</div>
+        <p>API pública para obtener datos de Pokémon. No se envían datos personales.</p>
+      </div>
+    </div>
+    <p style="margin-top:16px;">Podés consultar la política de privacidad de Google en <strong>policies.google.com/privacy</strong>.</p>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2><span class="num">4</span>Seguridad de los datos</h2>
+    <div class="highlight">
+      <ul>
+        <li>Todos los datos se almacenan en <strong>Cloud Firestore</strong> con reglas de seguridad que garantizan que cada usuario solo puede acceder a sus propios datos.</li>
+        <li>La comunicación entre la app y los servidores se realiza siempre mediante <strong>HTTPS</strong>.</li>
+        <li>No almacenamos contraseñas ni información de pago.</li>
+        <li>El acceso a la tabla de clasificación es de solo lectura para usuarios autenticados.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2><span class="num">5</span>Retención de datos</h2>
+    <p>Tus datos se conservan mientras tengas una cuenta activa en la aplicación. Si deseás eliminar tu cuenta y todos los datos asociados, podés solicitarlo en cualquier momento escribiéndonos al correo de contacto indicado al final de esta página.</p>
+    <p>Tras recibir la solicitud, eliminaremos todos los datos dentro de los <strong>30 días hábiles</strong> siguientes.</p>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <h2><span class="num">6</span>Menores de edad</h2>
+    <p>PokeQuiz no está dirigido a menores de 13 años. No recopilamos conscientemente información personal de niños menores de 13 años. Si sos padre/madre o tutor y creés que tu hijo nos ha proporcionado información personal, contactanos para que podamos eliminarla.</p>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <h2><span class="num">7</span>Tus derechos</h2>
+    <ul>
+      <li><strong>Acceso:</strong> podés solicitar una copia de los datos que tenemos sobre vos.</li>
+      <li><strong>Corrección:</strong> podés solicitar la corrección de datos incorrectos.</li>
+      <li><strong>Eliminación:</strong> podés solicitar la eliminación completa de tu cuenta y datos.</li>
+      <li><strong>Portabilidad:</strong> podés solicitar tus datos en formato legible.</li>
+    </ul>
+    <p>Para ejercer cualquiera de estos derechos, escribinos al correo de contacto.</p>
+  </section>
+
+  <!-- 8 -->
+  <section>
+    <h2><span class="num">8</span>Cambios a esta política</h2>
+    <p>Podemos actualizar esta política de privacidad ocasionalmente. Cuando lo hagamos, actualizaremos la fecha en la parte superior de esta página. Te recomendamos revisarla periódicamente.</p>
+    <p>El uso continuado de la aplicación después de cualquier cambio implica la aceptación de la nueva política.</p>
+  </section>
+
+  <!-- 9 -->
+  <section>
+    <h2><span class="num">9</span>Contacto</h2>
+    <div class="contact-box">
+      <p>Si tenés preguntas sobre esta política de privacidad o querés ejercer tus derechos, podés contactarnos en:</p>
+      <a class="contact-email" href="mailto:petloverscompanycba@gmail.com">
+        petloverscompanycba@gmail.com
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 PokeQuiz &nbsp;·&nbsp; Todos los derechos reservados
+  &nbsp;·&nbsp;
+  PokeQuiz no está afiliado a Nintendo, Game Freak ni The Pokémon Company.
+</footer>
+
+</body>
+</html>
