@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eliminar cuenta — PokeQuiz</title>
+  <style>
+    :root {
+      --bg:      #080D18;
+      --surface: #0F1923;
+      --border:  #1E2D45;
+      --primary: #E53E3E;
+      --secondary:#38BDF8;
+      --gold:    #FBBF24;
+      --text:    #F1F5F9;
+      --muted:   #94A3B8;
+      --dim:     #475569;
+      --success: #22C55E;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; }
+    header h1 span { color: var(--primary); }
+    header p { color: var(--muted); font-size: .85rem; margin-top: 4px; }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* Warning banner */
+    .warning {
+      background: rgba(229,62,62,.1);
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 40px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .warning-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .warning p { color: var(--muted); margin: 0; }
+    .warning strong { color: var(--text); }
+
+    h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 16px;
+    }
+
+    section { margin-bottom: 40px; }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 12px; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .step-num {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: .85rem;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-body strong { color: var(--text); display: block; margin-bottom: 2px; }
+    .step-body p { color: var(--muted); font-size: .9rem; margin: 0; }
+
+    /* Data table */
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+    .data-table th {
+      text-align: left;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 10px 12px;
+      font-size: .88rem;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .tag-del { background: rgba(229,62,62,.15); color: var(--primary); }
+    .tag-keep { background: rgba(56,189,248,.12); color: var(--secondary); }
+
+    /* Email CTA */
+    .cta-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+    }
+    .cta-box p { color: var(--muted); margin-bottom: 16px; }
+    .email-link {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 10px;
+    }
+    .email-link:hover { background: #c53030; }
+    .subject-hint {
+      display: block;
+      color: var(--dim);
+      font-size: .8rem;
+      margin-top: 12px;
+    }
+
+    /* Timeline */
+    .timeline {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .tl-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+    .tl-dot.red { background: var(--primary); }
+    .timeline-item p { color: var(--muted); font-size: .9rem; margin: 0; }
+    .timeline-item strong { color: var(--text); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      color: var(--dim);
+      font-size: .82rem;
+    }
+    footer a { color: var(--secondary); text-decoration: none; }
+
+    @media (max-width: 480px) {
+      main { padding: 32px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Poke<span>Quiz</span></h1>
+  <p>Solicitud de eliminación de cuenta y datos</p>
+</header>
+
+<main>
+
+  <div class="warning">
+    <div class="warning-icon">⚠️</div>
+    <div>
+      <p><strong>Esta acción es permanente.</strong> Una vez eliminada tu cuenta, no podrás recuperar tu historial de partidas, logros, XP ni posición en la tabla de clasificación.</p>
+    </div>
+  </div>
+
+  <!-- Pasos -->
+  <section>
+    <h2>Cómo solicitar la eliminación</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Enviá un correo electrónico</strong>
+          <p>Escribí a <strong>kernelstudio.solutions@gmail.com</strong> desde la dirección de Gmail que usaste para iniciar sesión en PokeQuiz.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Usá el asunto: "Eliminar cuenta PokeQuiz"</strong>
+          <p>Indicá en el cuerpo del mensaje que querés eliminar tu cuenta y todos los datos asociados.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Confirmación</strong>
+          <p>Te responderemos dentro de las <strong>72 horas</strong> para confirmar la recepción de tu solicitud.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Eliminación completada</strong>
+          <p>Todos tus datos serán eliminados dentro de los <strong>30 días hábiles</strong> siguientes a la confirmación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="cta-box">
+      <p>Hacé click para abrir el correo con el asunto ya completado:</p>
+      <a class="email-link"
+         href="mailto:kernelstudio.solutions@gmail.com?subject=Eliminar%20cuenta%20PokeQuiz&body=Hola%2C%20quiero%20solicitar%20la%20eliminaci%C3%B3n%20de%20mi%20cuenta%20y%20todos%20los%20datos%20asociados%20en%20PokeQuiz.">
+        Enviar solicitud por email
+      </a>
+      <span class="subject-hint">kernelstudio.solutions@gmail.com · Asunto: "Eliminar cuenta PokeQuiz"</span>
+    </div>
+  </section>
+
+  <!-- Qué se elimina -->
+  <section>
+    <h2>Datos que se eliminan y datos que se conservan</h2>
+    <div class="timeline">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Dato</th>
+            <th>Acción</th>
+            <th>Retención</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nombre y foto de perfil de Google</td>
+            <td><span class="tag tag-del">Eliminado</span></td>
+            <td>Al completarse la solicitud</td>
+          </tr>
+          <tr>
+            <td>Historial de partidas</td>
+            <td><span class="tag tag-del">Eliminado</span></td>
+            <td>Al completarse la solicitud</td>
+          </tr>
+          <tr>
+            <td>Logros y estadísticas (XP, nivel, racha)</td>
+            <td><span class="tag tag-del">Eliminado</span></td>
+            <td>Al completarse la solicitud</td>
+          </tr>
+          <tr>
+            <td>Cuenta de Firebase Authentication</td>
+            <td><span class="tag tag-del">Eliminado</span></td>
+            <td>Al completarse la solicitud</td>
+          </tr>
+          <tr>
+            <td>Entradas en tabla de clasificación</td>
+            <td><span class="tag tag-del">Eliminado</span></td>
+            <td>Al completarse la solicitud</td>
+          </tr>
+          <tr>
+            <td>Registros de solicitud de eliminación</td>
+            <td><span class="tag tag-keep">Conservado</span></td>
+            <td>90 días (auditoría interna)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section>
+    <h2>Plazos del proceso</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <p><strong>Día 0 —</strong> Recibimos tu solicitud por email.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot"></div>
+        <p><strong>Hasta 72 hs —</strong> Te enviamos confirmación de que procesamos tu pedido.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-dot red"></div>
+        <p><strong>Hasta 30 días hábiles —</strong> Todos los datos personales son eliminados de nuestros sistemas.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 PokeQuiz &nbsp;·&nbsp;
+  <a href="index.html">Política de Privacidad</a>
+  &nbsp;·&nbsp;
+  PokeQuiz no está afiliado a Nintendo, Game Freak ni The Pokémon Company.
+</footer>
+
+</body>
+</html>
